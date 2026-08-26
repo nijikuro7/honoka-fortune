@@ -239,6 +239,39 @@ document.getElementById("tarotButton").addEventListener("click", function () {
     </p>
   `;
 });
+ // 💌 ほのかの今日のメッセージ
+const healingMessages = [
+  "焦らなくても大丈夫。あなたのペースで進んでいこうね💙",
+  "今日は小さな幸せを見つける日。笑顔を大切にしてね🌸",
+  "あなたが思っているより、ちゃんと頑張っていますよ✨",
+  "ひと休みすることも大切。ゆっくりいきましょう🍀",
+  "素敵なご縁があなたを待っているかもしれません💐",
+  "自分の心の声を大切にしてね。きっと答えは見つかります💙",
+  "今日もあなたらしく。それだけで十分素敵ですよ🩵"
+];
+
+const messageBox = document.createElement("div");
+
+messageBox.style.cssText =
+  "margin:25px 0;padding:24px;border-radius:24px;background:rgba(255,255,255,.92);text-align:center;box-shadow:0 10px 30px rgba(100,70,140,.15);";
+
+messageBox.innerHTML = `
+  <h2 style="color:#76549c;margin-top:0;">💌 ほのかの癒しメッセージ 💌</h2>
+  <p style="color:#665b70;">今日のあなたへのひとこと</p>
+  <button id="messageButton" style="border:0;border-radius:18px;padding:14px 24px;background:#a982c7;color:white;font-size:17px;font-weight:bold;cursor:pointer;">
+    ✨ メッセージを見る ✨
+  </button>
+  <div id="healingResult" style="margin-top:20px;font-size:17px;line-height:1.8;color:#51445f;"></div>
+`;
+
+document.body.appendChild(messageBox);
+
+document.getElementById("messageButton").addEventListener("click", function () {
+  const message =
+    healingMessages[Math.floor(Math.random() * healingMessages.length)];
+
+  document.getElementById("healingResult").textContent = message;
+});
 </script>
 </body>
 </html>
