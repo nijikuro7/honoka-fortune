@@ -182,6 +182,63 @@ function fortune() {
 
   document.getElementById("result").style.display = "block";
 }
+ // 🔮 ほのかのタロット占い
+const tarotCards = [
+  ["愚者", "新しい始まり。自由な気持ちで一歩踏み出せそう。"],
+  ["魔術師", "あなたの才能が輝くとき。自信を持って行動してみて。"],
+  ["女教皇", "直感を大切に。静かに考えることで答えが見つかりそう。"],
+  ["女帝", "愛情と豊かさのカード。心が満たされる出来事がありそう。"],
+  ["皇帝", "しっかり計画を立てることで、物事が安定して進みそう。"],
+  ["教皇", "信頼できる人の言葉がヒントになりそう。"],
+  ["恋人たち", "素敵なご縁や心ときめく選択が訪れそう。"],
+  ["戦車", "迷わず進むことで運が開けそう。行動力が幸運の鍵。"],
+  ["力", "優しさと勇気があなたの魅力。焦らず進めば大丈夫。"],
+  ["隠者", "ひとりの時間が大切。自分の心と向き合ってみて。"],
+  ["運命の輪", "思いがけないチャンスが巡ってきそう。流れに乗ってみて。"],
+  ["正義", "バランスを大切に。誠実な行動が良い結果につながりそう。"],
+  ["吊るされた男", "今は焦らず待つとき。違う視点から見ると答えが見つかりそう。"],
+  ["死神", "古いものを手放して、新しい自分へ変わるタイミング。"],
+  ["節制", "無理をせず、ゆっくり整えていくことで運気が安定しそう。"],
+  ["悪魔", "夢中になりすぎていることがないか、少しだけ見直してみて。"],
+  ["塔", "予想外の変化がありそう。でも、それは新しい始まりのきっかけ。"],
+  ["星", "希望の光が見えてきそう。夢をあきらめないで。"],
+  ["月", "不安に惑わされないで。今は自分の直感を大切に。"],
+  ["太陽", "とても明るいカード。笑顔と幸せに恵まれる一日になりそう。"],
+  ["審判", "嬉しい知らせや、もう一度チャンスが訪れるかもしれません。"],
+  ["世界", "ひとつのことが完成するカード。大きな達成感を味わえそう。"]
+];
+
+const tarotBox = document.createElement("div");
+tarotBox.style.cssText =
+  "margin:25px 0;padding:24px;border-radius:24px;background:rgba(255,255,255,.92);text-align:center;box-shadow:0 10px 30px rgba(100,70,140,.15);";
+
+tarotBox.innerHTML = `
+  <h2 style="color:#76549c;margin-top:0;">🔮 ほのかのタロット占い 🔮</h2>
+  <p style="color:#665b70;">今日のあなたへのメッセージを占います</p>
+  <button id="tarotButton" style="border:0;border-radius:18px;padding:14px 24px;background:#a982c7;color:white;font-size:17px;font-weight:bold;cursor:pointer;">
+    ✨ タロットを引く ✨
+  </button>
+  <div id="tarotResult" style="display:none;margin-top:20px;"></div>
+  <p style="font-size:12px;color:#888;margin-bottom:0;">※占いはエンターテインメントとしてお楽しみください。</p>
+`;
+
+document.body.appendChild(tarotBox);
+
+document.getElementById("tarotButton").addEventListener("click", function () {
+  const card = tarotCards[Math.floor(Math.random() * tarotCards.length)];
+  const reversed = Math.random() < 0.3;
+  const result = document.getElementById("tarotResult");
+
+  result.style.display = "block";
+  result.innerHTML = `
+    <div style="font-size:25px;color:#76549c;font-weight:bold;">
+      ${card[0]} ${reversed ? "（逆位置）" : "（正位置）"}
+    </div>
+    <p style="font-size:16px;line-height:1.8;color:#51445f;">
+      ${reversed ? "少し立ち止まって、自分の気持ちを整理してみて。" : card[1]}
+    </p>
+  `;
+});
 </script>
 </body>
 </html>
