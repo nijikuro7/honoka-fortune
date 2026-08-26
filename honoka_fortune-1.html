@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ほのかの占い</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, "Noto Sans JP", sans-serif;
+    background: linear-gradient(180deg, #f3e9ff 0%, #eaf6ff 100%);
+    color: #51445f;
+    min-height: 100vh;
+  }
+  .wrap {
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 24px 16px 40px;
+  }
+  .card {
+    background: rgba(255,255,255,.92);
+    border-radius: 24px;
+    padding: 24px;
+    box-shadow: 0 10px 30px rgba(100,80,130,.14);
+  }
+  h1 {
+    margin: 0 0 8px;
+    text-align: center;
+    color: #8b6bb1;
+    font-size: 30px;
+  }
+  .sub {
+    text-align: center;
+    margin: 0 0 22px;
+    color: #8c8195;
+  }
+  label {
+    display: block;
+    font-weight: 700;
+    margin: 12px 0 8px;
+  }
+  select, button {
+    width: 100%;
+    border-radius: 14px;
+    padding: 13px 14px;
+    font-size: 16px;
+  }
+  select {
+    border: 1px solid #d9cde5;
+    background: white;
+    color: #51445f;
+  }
+  button {
+    border: 0;
+    background: #a88bc8;
+    color: white;
+    font-weight: 700;
+    margin-top: 16px;
+    cursor: pointer;
+  }
+  button:active { transform: scale(.99); }
+  .result {
+    display: none;
+    margin-top: 22px;
+    padding: 20px;
+    border-radius: 20px;
+    background: #faf6ff;
+    border: 1px solid #eadff3;
+  }
+  .result h2 {
+    text-align: center;
+    margin: 0 0 16px;
+    color: #8060a8;
+  }
+  .fortune {
+    font-size: 25px;
+    text-align: center;
+    margin: 8px 0 18px;
+    letter-spacing: 2px;
+  }
+  .item {
+    padding: 10px 0;
+    border-top: 1px solid #e8dff0;
+  }
+  .item strong { color: #8060a8; }
+  .message {
+    margin-top: 16px;
+    padding: 14px;
+    border-radius: 14px;
+    background: white;
+    line-height: 1.7;
+  }
+  .note {
+    margin-top: 18px;
+    text-align: center;
+    font-size: 12px;
+    color: #9a90a2;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <h1>🌸 ほのかの占い 🌸</h1>
+    <p class="sub">今日のあなたの運勢を占います</p>
+
+    <label for="sign">星座を選んでください</label>
+    <select id="sign">
+      <option value="牡羊座">牡羊座</option>
+      <option value="牡牛座">牡牛座</option>
+      <option value="双子座">双子座</option>
+      <option value="蟹座">蟹座</option>
+      <option value="獅子座">獅子座</option>
+      <option value="乙女座">乙女座</option>
+      <option value="天秤座">天秤座</option>
+      <option value="蠍座">蠍座</option>
+      <option value="射手座">射手座</option>
+      <option value="山羊座">山羊座</option>
+      <option value="水瓶座">水瓶座</option>
+      <option value="魚座">魚座</option>
+    </select>
+
+    <button onclick="fortune()">✨ 今日の運勢を見る ✨</button>
+
+    <div id="result" class="result">
+      <h2 id="title"></h2>
+      <div id="stars" class="fortune"></div>
+      <div class="item"><strong>総合運：</strong><span id="total"></span></div>
+      <div class="item"><strong>恋愛運：</strong><span id="love"></span></div>
+      <div class="item"><strong>仕事運：</strong><span id="work"></span></div>
+      <div class="message" id="message"></div>
+    </div>
+
+    <p class="note">※占いはエンターテインメントとしてお楽しみください。</p>
+  </div>
+</div>
+
+<script>
+const zodiac = {
+  "牡羊座": "行動力があるね！",
+  "牡牛座": "落ち着きと粘り強さが魅力だよ！",
+  "双子座": "おしゃべりが楽しいよ！",
+  "蟹座": "思いやりがあって優しいね！",
+  "獅子座": "みんなのリーダーだね！",
+  "乙女座": "細やかな気配りが素敵！",
+  "天秤座": "オシャレでセンス抜群！",
+  "蠍座": "集中力がすごいね！",
+  "射手座": "自由な冒険家だね！",
+  "山羊座": "コツコツ頑張れる人だね！",
+  "水瓶座": "アイデアが個性的！",
+  "魚座": "想像力が豊かで優しいね！"
+};
+
+const luckLevels = ["★★★", "★★★★", "★★★★★"];
+
+const messages = [
+  "今日は直感を信じて進んでみて！",
+  "美味しいものを食べると運気が上がるかも！",
+  "深呼吸して、自分を褒めてあげてね。",
+  "小さなラッキーを見つけられそう！",
+  "無理をしすぎず、あなたのペースで大丈夫。",
+  "笑顔が素敵なご縁を引き寄せてくれそう！"
+];
+
+function randomChoice(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function fortune() {
+  const sign = document.getElementById("sign").value;
+  document.getElementById("title").textContent =
+    sign + "さんの今日の運勢";
+
+  document.getElementById("stars").textContent = randomChoice(luckLevels);
+  document.getElementById("total").textContent = randomChoice(luckLevels);
+  document.getElementById("love").textContent = randomChoice(luckLevels);
+  document.getElementById("work").textContent = randomChoice(luckLevels);
+
+  document.getElementById("message").textContent =
+    zodiac[sign] + " " + randomChoice(messages);
+
+  document.getElementById("result").style.display = "block";
+}
+</script>
+</body>
+</html>
