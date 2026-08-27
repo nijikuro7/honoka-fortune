@@ -287,6 +287,65 @@ messageBox.innerHTML = `
 `;
 
 document.body.appendChild(messageBox);
+ // 🌸 ほのかの花言葉
+const flowers = [
+  { name: "バラ", meaning: "愛・美", message: "あなたの中にある優しさを、大切にしてね💗" },
+  { name: "ひまわり", meaning: "憧れ・情熱", message: "あなたらしく、明るく輝いていこうね✨" },
+  { name: "チューリップ", meaning: "思いやり・博愛", message: "誰かを思いやる心は、とても素敵だよ🌷" },
+  { name: "桜", meaning: "精神の美・優美な女性", message: "あなたには、あなたにしかない美しさがあるよ🌸" },
+  { name: "キキョウ", meaning: "誠実", message: "素直なあなたの心を、大切にしてね💜" },
+  { name: "マーガレット", meaning: "真実の愛・信頼", message: "信じる気持ちを、ゆっくり育てていこうね🍀" },
+  { name: "ラベンダー", meaning: "沈黙・期待", message: "疲れたときは、静かに心を休ませてね🌿" },
+  { name: "ハイビスカス", meaning: "繊細な美・勇ましさ", message: "あなたの強さも優しさも、どちらも素敵だよ🌺" },
+  { name: "コスモス", meaning: "調和・乙女の純真", message: "自然体のあなたで大丈夫だよ🌸" },
+  { name: "カスミソウ", meaning: "感謝・幸福", message: "小さな幸せを、ひとつずつ大切にしてね💐" },
+  { name: "スイートピー", meaning: "門出・優しい思い出", message: "新しい一歩を、ゆっくり踏み出してみようね🩵" },
+  { name: "カーネーション", meaning: "無垢で深い愛", message: "あなたの優しい心は、ちゃんと届いているよ💗" },
+  { name: "ガーベラ", meaning: "希望・前進", message: "小さな一歩でも、ちゃんと前に進んでいるよ✨" },
+  { name: "スイセン", meaning: "自己愛・尊敬", message: "まずは自分自身を大切にしてあげてね🍀" },
+  { name: "アジサイ", meaning: "家族・団らん", message: "大切な人との時間を、ゆっくり楽しんでね💙" },
+  { name: "フリージア", meaning: "親愛の情・友情", message: "あなたを大切に思ってくれる人を、大切にしてね🌼" },
+  { name: "梅", meaning: "高潔・忍耐", message: "焦らなくて大丈夫。ゆっくりでも花は咲くよ🌸" },
+  { name: "すずらん", meaning: "幸せの再来・純粋", message: "きっとまた、素敵な幸せがやってくるよ🍀" },
+  { name: "藤", meaning: "優しさ・歓迎", message: "優しい心を持つあなたに、素敵なご縁がありますように💜" },
+  { name: "ポピー", meaning: "思いやり・いたわり", message: "今日は自分にも、たっぷり優しくしてあげてね🌸" }
+];
+
+const flowerBox = document.createElement("div");
+
+flowerBox.style.cssText =
+  "margin:25px 0;padding:24px;border-radius:24px;background:white;text-align:center;box-shadow:0 10px 30px rgba(100,70,140,.15);";
+
+flowerBox.innerHTML = `
+  <h2 style="color:#76549c;">🌸 ほのかの花言葉 🌸</h2>
+  <p style="color:#665b70;">花から今日のメッセージを受け取ってね</p>
+
+  <button id="flowerButton"
+    style="width:100%;padding:16px;border:0;border-radius:30px;background:#a77dcc;color:white;font-size:17px;font-weight:bold;">
+    ✨ 花言葉を見る ✨
+  </button>
+
+  <div id="flowerResult" style="margin-top:20px;"></div>
+`;
+
+document.body.appendChild(flowerBox);
+
+document.getElementById("flowerButton").addEventListener("click", () => {
+  const flower = flowers[Math.floor(Math.random() * flowers.length)];
+
+  document.getElementById("flowerResult").innerHTML = `
+    <h3 style="color:#76549c;font-size:24px;">
+      🌸 ${flower.name}
+    </h3>
+    <p style="color:#665b70;">
+      💕 花言葉：${flower.meaning}
+    </p>
+    <p style="color:#51445f;line-height:1.8;">
+      💙 ほのかの一言<br>
+      「${flower.message}」
+    </p>
+  `;
+});
 
 document.getElementById("messageButton").addEventListener("click", function () {
   const message =
