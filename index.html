@@ -355,6 +355,49 @@ document.getElementById("messageButton").addEventListener("click", function () {
 
   document.getElementById("healingResult").textContent = message;
 });
+ // 🌸 ほのかのオラクルカード
+const oracleCards = [
+  ["やさしい時間", "今日は自分をいたわって。無理をしなくても大丈夫です。"],
+  ["自分を信じて", "あなたの心が選んだ道を、ゆっくり信じて進んでみましょう。"],
+  ["新しい一歩", "小さな一歩でも大丈夫。未来への扉は少しずつ開いていきます。"],
+  ["希望", "今は見えなくても、明るい方向へ少しずつ進んでいます。"],
+  ["嬉しい知らせ", "思いがけない嬉しい出来事が訪れるかもしれません。"],
+  ["大切な想い", "あなたの心にある大切な気持ちを、そのまま大事にしてください。"],
+  ["休息", "頑張り続けなくて大丈夫。今日はゆっくり休むことも大切です。"],
+  ["小さな幸せ", "身近にある小さな幸せに目を向けてみましょう。"],
+  ["前を向いて", "焦らなくても大丈夫。あなたのペースで進んでいけばいいのです。"],
+  ["笑顔", "今日は少しでも心が軽くなることを楽しんでみましょう。"]
+];
+
+const oracleBox = document.createElement("div");
+
+oracleBox.style.cssText =
+  "margin:25px 0;padding:24px;border-radius:20px;background:#fff;border:2px solid #d8c7ff;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,0.08);";
+
+oracleBox.innerHTML = `
+  <h2 style="color:#76549c;">🔮 ほのかのオラクルカード</h2>
+  <p style="color:#665b70;">今のあなたへのメッセージを1枚引いてみましょう🩵</p>
+
+  <button id="oracleButton"
+    style="width:100%;padding:16px;border:0;border-radius:12px;background:#e8dcff;color:#51445f;font-size:18px;">
+    ✨ オラクルカードを引く ✨
+  </button>
+
+  <div id="oracleResult" style="margin-top:20px;"></div>
+`;
+
+document.body.appendChild(oracleBox);
+
+document.getElementById("oracleButton").addEventListener("click", () => {
+  const card = oracleCards[Math.floor(Math.random() * oracleCards.length)];
+
+  document.getElementById("oracleResult").innerHTML = `
+    <h3 style="color:#76549c;font-size:24px;">🌸 ${card[0]}</h3>
+    <p style="color:#51445f;line-height:1.8;font-size:17px;">
+      ${card[1]}
+    </p>
+  `;
+});
 </script>
 </body>
 </html>
